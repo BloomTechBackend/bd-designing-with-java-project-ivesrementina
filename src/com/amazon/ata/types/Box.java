@@ -9,8 +9,10 @@ public class Box extends Packaging {
     private BigDecimal height;
 
     public Box(Material material, BigDecimal length, BigDecimal width, BigDecimal height) {
-        super(material, length, width, height);
-
+        super(material);
+        this.length = length;
+        this.width = width;
+        this.height = height;
     }
 
     public boolean canFitItem(Item item) {
