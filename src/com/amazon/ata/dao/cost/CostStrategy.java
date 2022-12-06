@@ -1,4 +1,4 @@
-package com.amazon.ata.cost;
+package com.amazon.ata.dao.cost;
 
 import com.amazon.ata.types.ShipmentCost;
 import com.amazon.ata.types.ShipmentOption;

@@ -1,5 +1,6 @@
 package com.amazon.ata.cost;
 
+import com.amazon.ata.dao.cost.MonetaryCostStrategy;
 import com.amazon.ata.types.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

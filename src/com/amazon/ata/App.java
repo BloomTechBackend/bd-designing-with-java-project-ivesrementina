@@ -1,7 +1,7 @@
 package com.amazon.ata;
 
-import com.amazon.ata.cost.CostStrategy;
-import com.amazon.ata.cost.MonetaryCostStrategy;
+import com.amazon.ata.dao.cost.CostStrategy;
+import com.amazon.ata.dao.cost.MonetaryCostStrategy;
 import com.amazon.ata.dao.PackagingDAO;
 import com.amazon.ata.datastore.PackagingDatastore;
 import com.amazon.ata.service.ShipmentService;
