@@ -1,0 +1,40 @@
+@startuml
+class Box {
+    -length : BigDecimal
+    -width : BigDecimal
+    -height : BigDecimal
+
+    + Box(Material, BigDecimal, BigDecimal, BigDecimal)
+    + canFitItem(Item) : boolean
+    + getMass() : BigDecimal
+    + getLength() : BigDecimal
+    + getWidth() : BigDecimal
+    + getHeight() : BigDecimal
+}
+
+class PolyBag {
+    -volume : BigDecimal
+
+    +PolyBag(Material, BigDecimal)
+    +canFitItem(Item) : boolean
+    +getMass() : BigDecimal
+}
+enum Material {
+    CORRUGATE
+    LAMINATED_PLASTIC
+}
+
+class Packaging {
+    -material : Material
+
+    +Packaging(Material)
+    +getMaterial() : Material
+    +canFitItem(Item) : boolean
+    +getMass() : BigDecimal
+    +equals(Object) : boolean
+    +hashcode() : int
+}
+Box --|> Packaging
+PolyBag --|> Packaging
+Material -- Packaging
+@enduml
