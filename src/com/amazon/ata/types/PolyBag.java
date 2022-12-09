@@ -2,7 +2,7 @@ package com.amazon.ata.types;
 
 import java.math.BigDecimal;
 
-public class PolyBag extends Packaging{
+public class PolyBag extends Packaging {
 
     private BigDecimal volume;
 
