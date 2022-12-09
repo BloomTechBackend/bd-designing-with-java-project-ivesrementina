@@ -11,12 +11,20 @@ public class PolyBag extends Packaging{
         this.volume = volume;
     }
 
+    @Override
     public boolean canFitItem(Item item) {
-        return this.volume.compareTo(item.getHeight().multiply(item.getLength().multiply(item.getWidth()))) > 0;
+        BigDecimal itemHeight = item.getHeight();
+        BigDecimal itemLength = item.getLength();
+        BigDecimal itemWidth = item.getWidth();
+        BigDecimal itemVolume = itemHeight.multiply(itemLength).multiply(itemWidth);
+        return volume.compareTo(itemVolume) < 0;
     }
 
     public BigDecimal getMass() {
         double mass = Math.ceil(Math.sqrt(volume.doubleValue()) * 0.6);
         return BigDecimal.valueOf(mass);
+    }
+    public BigDecimal getVolume() {
+        return volume;
     }
 }
