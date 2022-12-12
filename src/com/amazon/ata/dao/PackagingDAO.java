@@ -9,8 +9,7 @@ import com.amazon.ata.types.Item;
 import com.amazon.ata.types.Packaging;
 import com.amazon.ata.types.ShipmentOption;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Access data for which packaging is available at which fulfillment center.
@@ -19,16 +18,24 @@ public class PackagingDAO {
     /**
      * A list of fulfillment centers with a packaging options they provide.
      */
-    private List<FcPackagingOption> fcPackagingOptions;
+     private HashSet<FcPackagingOption> fcPackagingOptions;
+     private Map<FulfillmentCenter, Set<FcPackagingOption>> fulfillmentCenterSetHashMap = new HashMap<>();
 
     /**
      * Instantiates a PackagingDAO object.
      * @param datastore Where to pull the data from for fulfillment center/packaging available mappings.
      */
     public PackagingDAO(PackagingDatastore datastore) {
-        this.fcPackagingOptions =  new ArrayList<>(datastore.getFcPackagingOptions());
-    }
+        //this.fcPackagingOptions =  new ArrayList<>(datastore.getFcPackagingOptions());
+        this.fcPackagingOptions =  new HashSet<>(datastore.getFcPackagingOptions());
 
+        for (FcPackagingOption fcPackagingOption : fcPackagingOptions) {
+            fulfillmentCenterSetHashMap.put(
+                    fcPackagingOption.getFulfillmentCenter(),
+                    fcPackagingOptions
+            );
+        }
+    }
     /**
      * Returns the packaging options available for a given item at the specified fulfillment center. The API
      * used to call this method handles null inputs, so we don't have to.
