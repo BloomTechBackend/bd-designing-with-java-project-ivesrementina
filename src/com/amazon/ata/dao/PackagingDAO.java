@@ -18,16 +18,17 @@ public class PackagingDAO {
     /**
      * A list of fulfillment centers with a packaging options they provide.
      */
-     private HashSet<FcPackagingOption> fcPackagingOptions;
-     private Map<FulfillmentCenter, Set<FcPackagingOption>> fulfillmentCenterSetHashMap = new HashMap<>();
+    private HashSet<FcPackagingOption> fcPackagingOptions;
+    private Map<FulfillmentCenter, Set<FcPackagingOption>> fulfillmentCenterSetHashMap = new HashMap<>();
 
     /**
      * Instantiates a PackagingDAO object.
+     *
      * @param datastore Where to pull the data from for fulfillment center/packaging available mappings.
      */
     public PackagingDAO(PackagingDatastore datastore) {
         //this.fcPackagingOptions =  new ArrayList<>(datastore.getFcPackagingOptions());
-        this.fcPackagingOptions =  new HashSet<>(datastore.getFcPackagingOptions());
+        this.fcPackagingOptions = new HashSet<>(datastore.getFcPackagingOptions());
 
         for (FcPackagingOption fcPackagingOption : fcPackagingOptions) {
             fulfillmentCenterSetHashMap.put(
@@ -36,16 +37,17 @@ public class PackagingDAO {
             );
         }
     }
+
     /**
      * Returns the packaging options available for a given item at the specified fulfillment center. The API
      * used to call this method handles null inputs, so we don't have to.
      *
-     * @param item the item to pack
+     * @param item              the item to pack
      * @param fulfillmentCenter fulfillment center to fulfill the order from
      * @return the shipping options available for that item; this can never be empty, because if there is no
      * acceptable option an exception will be thrown
      * @throws UnknownFulfillmentCenterException if the fulfillmentCenter is not in the fcPackagingOptions list
-     * @throws NoPackagingFitsItemException if the item doesn't fit in any packaging at the FC
+     * @throws NoPackagingFitsItemException      if the item doesn't fit in any packaging at the FC
      */
     public List<ShipmentOption> findShipmentOptions(Item item, FulfillmentCenter fulfillmentCenter)
             throws UnknownFulfillmentCenterException, NoPackagingFitsItemException {
@@ -82,6 +84,7 @@ public class PackagingDAO {
 
         return result;
     }
+}
 //    public List<ShipmentOption> findShipmentOptions(Item item, FulfillmentCenter fulfillmentCenter)
 //            throws UnknownFulfillmentCenterException, NoPackagingFitsItemException {
 //
@@ -119,5 +122,4 @@ public class PackagingDAO {
 //        }
 //
 //        return result;
-//    }
-}
+//    }}
