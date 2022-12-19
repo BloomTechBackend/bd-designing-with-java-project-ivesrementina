@@ -11,24 +11,32 @@ import java.util.Map;
 
 public class CarbonCostStrategy implements CostStrategy {
 
-    private final Map<Material, BigDecimal> CarbonCostPerGram;
+    private final Map<Material, BigDecimal> materialCostPerGram;
 
+    /**
+     * CarbonCostStrategy.
+     */
     public CarbonCostStrategy() {
-        CarbonCostPerGram = new HashMap<>();
-        CarbonCostPerGram.put(Material.CORRUGATE, BigDecimal.valueOf(0.017));
-        CarbonCostPerGram.put(Material.LAMINATED_PLASTIC, BigDecimal.valueOf(0.012));
+        materialCostPerGram = new HashMap<>();
+        materialCostPerGram.put(Material.CORRUGATE, BigDecimal.valueOf(0.017));
+        materialCostPerGram.put(Material.LAMINATED_PLASTIC, BigDecimal.valueOf(0.012));
     }
 
     @Override
     public ShipmentCost getCost(ShipmentOption shipmentOption) {
         Packaging packaging = shipmentOption.getPackaging();
-        BigDecimal materialCost = this.CarbonCostPerGram.get(packaging.getMaterial());
+        BigDecimal materialCost = this.materialCostPerGram.get(packaging.getMaterial());
         BigDecimal cost = packaging.getMass().multiply(materialCost);
         return new ShipmentCost(shipmentOption, cost);
     }
 
+    /**
+     * getCarbonCostPerGram.
+     * @param material material
+     * @return CarbonCostPerGram
+     */
     public BigDecimal getCarbonCostPerGram(Material material) {
-        return CarbonCostPerGram.get(material);
+        return materialCostPerGram.get(material);
     }
 }
 

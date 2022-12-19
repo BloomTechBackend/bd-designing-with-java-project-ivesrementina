@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Box extends Packaging {
-    Material box = Material.CORRUGATE;
     private BigDecimal length;
     private BigDecimal width;
     private BigDecimal height;
@@ -64,9 +63,9 @@ public class Box extends Packaging {
             return false;
         }
 
-        Box bx = (Box) o;
-        return Objects.equals(getLength(), bx.getLength()) && Objects.equals(getHeight(),
-                bx.getHeight()) && Objects.equals(getWidth(), bx.getWidth());
+        Box box = (Box) o;
+        return Objects.equals(getLength(), box.getLength()) && Objects.equals(getHeight(),
+                box.getHeight()) && Objects.equals(getWidth(), box.getWidth());
     }
 
     /**

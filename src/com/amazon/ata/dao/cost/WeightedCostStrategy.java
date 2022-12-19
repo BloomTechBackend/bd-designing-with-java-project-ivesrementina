@@ -14,6 +14,11 @@ public class WeightedCostStrategy implements CostStrategy {
     private static final BigDecimal LABOR_COST = BigDecimal.valueOf(0.33);
     private final Map<Material, BigDecimal> weightedCostPerGram;
 
+    /**
+     * WeightedCostStrategy.
+     * @param monetaryWrapper monetaryWrapper
+     * @param carbonWrapper carbonWrapper
+     */
     public WeightedCostStrategy(MonetaryCostStrategy monetaryWrapper, CarbonCostStrategy carbonWrapper) {
         weightedCostPerGram = new HashMap<>();
 
@@ -33,54 +38,12 @@ public class WeightedCostStrategy implements CostStrategy {
     @Override
     public ShipmentCost getCost(ShipmentOption shipmentOption) {
         Packaging packaging = shipmentOption.getPackaging();
-        BigDecimal weightedCostPerGram = this.weightedCostPerGram.get(packaging.getMaterial());
+        BigDecimal weightCostPerGram = this.weightedCostPerGram.get(packaging.getMaterial());
 
-        BigDecimal weightedCost = packaging.getMass().multiply(weightedCostPerGram).add(LABOR_COST);
+        BigDecimal weightedCost = packaging.getMass().multiply(weightCostPerGram).add(LABOR_COST);
 
         return new ShipmentCost(shipmentOption, weightedCost);
     }
 
 }
 
-
-//public class WeightedCostStrategy implements CostStrategy {
-//
-//    private static final BigDecimal LABOR_COST = BigDecimal.valueOf(0.33);
-//    private final Map<Material, BigDecimal> weightedCostPerGram;
-//
-//    public WeightedCostStrategy(MonetaryCostStrategy monetaryWrapper, CarbonCostStrategy carbonWrapper) {
-//        weightedCostPerGram = new HashMap<>();
-//
-////        BigDecimal weightedCostBox = ((carbonWrapper.getCarbonCostPerGram(Material.CORRUGATE)) // carbon cost of box
-////                .multiply(BigDecimal.valueOf(0.20)))  // multiplied by weight 20%
-////                .add((monetaryWrapper.getMonetaryCostPerGram(Material.CORRUGATE)) // add monetary cost
-////                        .multiply(BigDecimal.valueOf(0.80))); // multiplied by weight 80%
-////        weightedCostPerGram.put(Material.CORRUGATE, weightedCostBox);
-//
-//
-//        BigDecimal carbonCostPerGram = carbonWrapper.getCarbonCostPerGram(Material.CORRUGATE);
-//        BigDecimal carbonCostWeighted = carbonCostPerGram.multiply(BigDecimal.valueOf(0.20));
-//        BigDecimal monetaryCostPerGram = monetaryWrapper.getMonetaryCostPerGram(Material.CORRUGATE);
-//        BigDecimal monetaryCostWeighted = monetaryCostPerGram.multiply(BigDecimal.valueOf(0.80));
-//        BigDecimal weightedCostBox = carbonCostWeighted.add(monetaryCostWeighted);
-//
-//        weightedCostPerGram.put(Material.CORRUGATE, weightedCostBox);
-//
-//
-//        BigDecimal weightedCostPolyBag = ((carbonWrapper.getCarbonCostPerGram(Material.LAMINATED_PLASTIC))
-//                .multiply(BigDecimal.valueOf(0.20)))
-//                .add((monetaryWrapper.getMonetaryCostPerGram(Material.LAMINATED_PLASTIC))
-//                        .multiply(BigDecimal.valueOf(0.80)));
-//        weightedCostPerGram.put(Material.LAMINATED_PLASTIC, weightedCostPolyBag);
-//    }
-//
-//    @Override
-//    public ShipmentCost getCost(ShipmentOption shipmentOption) {
-//        Packaging packaging = shipmentOption.getPackaging();
-//        BigDecimal weightedCostPerGram = this.weightedCostPerGram.get(packaging.getMaterial());
-//
-//        BigDecimal weightedCost = packaging.getMass().multiply(weightedCostPerGram).add(LABOR_COST);
-//
-//        return new ShipmentCost(shipmentOption, weightedCost);
-//    }
-//}

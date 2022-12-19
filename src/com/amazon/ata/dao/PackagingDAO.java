@@ -9,7 +9,14 @@ import com.amazon.ata.types.Item;
 import com.amazon.ata.types.Packaging;
 import com.amazon.ata.types.ShipmentOption;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+
 
 /**
  * Access data for which packaging is available at which fulfillment center.
@@ -18,7 +25,7 @@ public class PackagingDAO {
     /**
      * A list of fulfillment centers with a packaging options they provide.
      */
-    private HashSet<FcPackagingOption> fcPackagingOptions;
+    private Set<FcPackagingOption> fcPackagingOptions;
     private Map<FulfillmentCenter, Set<FcPackagingOption>> fulfillmentCenterSetHashMap = new HashMap<>();
 
     /**
@@ -56,7 +63,7 @@ public class PackagingDAO {
         boolean fcFound = false;
         for (FcPackagingOption fcPackagingOption : fcPackagingOptions) {
             Packaging packaging = fcPackagingOption.getPackaging();
-             String fcCode = fcPackagingOption.getFulfillmentCenter().getFcCode();
+            String fcCode = fcPackagingOption.getFulfillmentCenter().getFcCode();
 
             if (fcCode.equals(fulfillmentCenter.getFcCode())) {
                 fcFound = true;
