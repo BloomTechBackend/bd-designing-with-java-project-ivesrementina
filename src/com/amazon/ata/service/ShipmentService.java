@@ -1,8 +1,7 @@
 package com.amazon.ata.service;
 
-import com.amazon.ata.dao.cost.CostStrategy;
 import com.amazon.ata.dao.PackagingDAO;
-import com.amazon.ata.exceptions.NoPackagingFitsItemException;
+import com.amazon.ata.dao.cost.CostStrategy;
 import com.amazon.ata.types.FulfillmentCenter;
 import com.amazon.ata.types.Item;
 import com.amazon.ata.types.ShipmentCost;

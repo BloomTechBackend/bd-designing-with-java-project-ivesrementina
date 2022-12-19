@@ -9,6 +9,13 @@ public class Box extends Packaging {
     private BigDecimal width;
     private BigDecimal height;
 
+    /**
+     * Box.
+     * @param material material
+     * @param length length
+     * @param width width
+     * @param height height
+     */
     public Box(Material material, BigDecimal length, BigDecimal width, BigDecimal height) {
         super(material);
         this.length = length;
@@ -57,13 +64,15 @@ public class Box extends Packaging {
             return false;
         }
 
-        Box box = (Box) o;
-        return getMaterial().equals(box.getMaterial()) &&
-                length.equals(box.length) &&
-                width.equals(box.width) &&
-                height.equals(box.height);
+        Box bx = (Box) o;
+        return Objects.equals(getLength(), bx.getLength()) && Objects.equals(getHeight(),
+                bx.getHeight()) && Objects.equals(getWidth(), bx.getWidth());
     }
 
+    /**
+     * hashCode.
+     * @return Objects.
+     */
     public int hashCode() {
         return Objects.hash(getMaterial(), length, width, height);
     }
