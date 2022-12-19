@@ -27,7 +27,6 @@ public class PackagingDAO {
      * @param datastore Where to pull the data from for fulfillment center/packaging available mappings.
      */
     public PackagingDAO(PackagingDatastore datastore) {
-        //this.fcPackagingOptions =  new ArrayList<>(datastore.getFcPackagingOptions());
         this.fcPackagingOptions = new HashSet<>(datastore.getFcPackagingOptions());
 
         for (FcPackagingOption fcPackagingOption : fcPackagingOptions) {
@@ -57,7 +56,7 @@ public class PackagingDAO {
         boolean fcFound = false;
         for (FcPackagingOption fcPackagingOption : fcPackagingOptions) {
             Packaging packaging = fcPackagingOption.getPackaging();
-            String fcCode = fcPackagingOption.getFulfillmentCenter().getFcCode();
+             String fcCode = fcPackagingOption.getFulfillmentCenter().getFcCode();
 
             if (fcCode.equals(fulfillmentCenter.getFcCode())) {
                 fcFound = true;
@@ -85,41 +84,3 @@ public class PackagingDAO {
         return result;
     }
 }
-//    public List<ShipmentOption> findShipmentOptions(Item item, FulfillmentCenter fulfillmentCenter)
-//            throws UnknownFulfillmentCenterException, NoPackagingFitsItemException {
-//
-//        // Check all FcPackagingOptions for a suitable Packaging in the given FulfillmentCenter
-//        List<ShipmentOption> result = new ArrayList<>();
-//        boolean fcFound = false;
-//
-//        if (!fcPackagingOptions.contains(fcPackagingOption.getFulfillmentCenter())) {
-//            throw new UnknownFulfillmentCenterException(
-//                    String.format("Unknown FC: %s!", fulfillmentCenter.getFcCode()));
-//        }
-//
-//        for (FcPackagingOption fcPackagingOption : fcPackagingOptions.get(fulfillmentCenter)) {
-//            Packaging packaging = fcPackagingOption.getPackaging();
-//            String fcCode = fcPackagingOption.getFulfillmentCenter().getFcCode();
-//
-//            if (packaging.canFitItem(item)) {
-//                result.add(ShipmentOption.builder()
-//                        .withItem(item)
-//                        .withPackaging(packaging)
-//                        .withFulfillmentCenter(fulfillmentCenter)
-//                        .build());
-//            }
-//        }
-//
-//        // Notify caller about unexpected results
-//        /*if (!fcFound) {
-//            throw new UnknownFulfillmentCenterException(
-//                    String.format("Unknown FC: %s!", fulfillmentCenter.getFcCode()));
-//        }*/
-//
-//        if (result.isEmpty()) {
-//            throw new NoPackagingFitsItemException(
-//                    String.format("No packaging at %s fits %s!", fulfillmentCenter.getFcCode(), item));
-//        }
-//
-//        return result;
-//    }}
